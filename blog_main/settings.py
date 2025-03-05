@@ -21,7 +21,8 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n8fv9^uv&yal(8=-2t#_whwclyltmzfvrmg+#oa^&0i9-i%@f!'
+SECRET_KEY = os.getenv(
+    "SECRET_KEY", "django-insecure-n8fv9^uv&yal(8=-2t#_whwclyltmzfvrmg+#oa^&0i9-i%@f!")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -66,7 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'blog.context_processors.get_categories_counts'
+                'blog.context_processors.get_categories_counts',
+                'blog.context_processors.get_author'
             ],
         },
     },
@@ -104,6 +106,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'blog.CustomUser'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

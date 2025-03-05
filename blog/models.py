@@ -2,6 +2,18 @@ from django.db import models
 from django.template.defaultfilters import slugify
 from django_ckeditor_5.fields import CKEditor5Field
 from taggit.managers import TaggableManager
+from django.contrib.auth.models import AbstractUser
+
+
+class CustomUser(AbstractUser):
+    position = models.CharField(max_length=100)
+    x_account = models.URLField(blank=True)
+    fb_account = models.URLField(blank=True)
+    github_account = models.URLField(blank=True)
+    linkedin_account = models.URLField(blank=True)
+    image = models.ImageField(upload_to='user')
+    intro = models.TextField(max_length=200)
+    about = models.TextField(max_length=1000)
 
 
 class Category(models.Model):

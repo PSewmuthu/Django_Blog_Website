@@ -58,7 +58,7 @@
 		<header id="header" class="header position-relative">
 			<div class="container-fluid container-xl position-relative">
 				<div class="top-row d-flex align-items-center justify-content-between">
-					<a href="index.html" class="logo d-flex align-items-end">
+					<a href="{% url 'home' %}" class="logo d-flex align-items-end">
 						<!-- Uncomment the line below if you also wish to use an image logo -->
 						<!-- <img src="assets/img/logo.webp" alt=""> -->
 						<h1 class="sitename">Blog Website</h1>
@@ -66,8 +66,8 @@
 					</a>
 
 					<div class="d-flex align-items-center">
-						<form class="search-form ms-4">
-							<input type="text" placeholder="Search..." class="form-control" />
+						<form class="search-form ms-4" action="{% url 'search' %}" method="GET">
+							<input type="text" name="keyword" placeholder="Search..." class="form-control" />
 							<button type="submit" class="btn">
 								<i class="bi bi-search"></i>
 							</button>
@@ -80,12 +80,11 @@
 				<div class="container d-flex justify-content-center position-relative">
 					<nav id="navmenu" class="navmenu">
 						<ul>
-							<li><a href="index.html" class="active">Home</a></li>
-							<li><a href="about.html">About</a></li>
-							<li><a href="blog-details.html">Blog Details</a></li>
-							<li><a href="author-profile.html">Author Profile</a></li>
+							<li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+							<li><a href="{% url 'categories' %}" class="{% if '/category/' in request.path or '/categories/' in request.path or '/tag/' in request.path %}active{% endif %}">Categories</a></li>
+							<li><a href="{% url 'author' %}" class="{% if request.path == '/author' %}active{% endif %}">Author Profile</a></li>
 
-							<li><a href="contact.html">Contact</a></li>
+							<li><a href="{% url 'contacts' %}" class="{% if request.path == '/contacts/' %}active{% endif %}">Contact</a></li>
 						</ul>
 						<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 					</nav>
@@ -93,6 +92,4 @@
 			</div>
 		</header>
 
-		<main class="main"></main>
-	</body>
-</html>
+		<main class="main">

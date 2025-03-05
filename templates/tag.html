@@ -1,0 +1,72 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<!-- Page Title -->
+<div class="page-title">
+    <div class="title-wrapper">
+      <h1>Blog Category</h1>
+      <p>We found <strong>{{ size }}</strong> results for category <strong>{{ tag.name }}</strong></p>
+    </div>
+  </div><!-- End Page Title -->
+
+  <!-- Search Results Posts Section -->
+  <section id="search-results-posts" class="search-results-posts section">
+
+    <div class="container" data-aos="fade-up" data-aos-delay="100">
+      <div class="row gy-4">
+
+        {% for post in posts.object_list %}
+        <div class="col-lg-4">
+          <article>
+
+            <div class="post-img">
+              <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid">
+            </div>
+
+            <p class="post-category"><a href="{% url 'category' post.category.pk %}">{{ post.category }}</a></p>
+
+            <h2 class="title">
+              <a href="">{{ post.title }}</a>
+            </h2>
+
+            <div class="d-flex align-items-center">
+              <div class="post-meta">
+                <p class="post-date">
+                  <time datetime="{{ post.created_at|date }}">{{ post.created_at|date:"N d, Y" }}</time>
+                </p>
+              </div>
+            </div>
+
+          </article>
+        </div><!-- End post list item -->
+        {% endfor %}
+
+      </div>
+    </div>
+
+  </section><!-- /Search Results Posts Section -->
+
+  <!-- Pagination 3 Section -->
+  <section id="pagination-3" class="pagination-3 section">
+
+    <div class="container">
+      <div class="d-flex justify-content-center">
+        <ul>
+            {% if posts.has_previous %}
+            <li><a href="?page={{ posts.previous_page_number }}"><i class="bi bi-chevron-left"></i></a></li>
+            {% endif %}
+
+            {% for page in posts.paginator.page_range %}
+            <li><a href="{% if page == posts.number %}?page={{ page }}{% endif %}" class="{% if page == posts.number %}active{% endif %}">{{ page }}</a></li>
+            {% endfor %}
+
+            {% if posts.has_next %}
+            <li><a href="?page={{ posts.next_page_number }}"><i class="bi bi-chevron-right"></i></a></li>
+            {% endif %}
+        </ul>
+      </div>
+    </div>
+
+  </section><!-- /Pagination 3 Section -->
+
+{% endblock %}

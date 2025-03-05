@@ -6,7 +6,7 @@
   <div class="container footer-top">
     <div class="row gy-4">
       <div class="col-lg-4 col-md-6 footer-about">
-        <a href="index.html" class="logo d-flex align-items-center">
+        <a href="{% url 'home' %}" class="logo d-flex align-items-center">
           <span class="sitename">Blog Website</span>
         </a>
         <div class="footer-contact pt-3">
@@ -23,31 +23,30 @@
 
       <div class="col-lg-2 col-md-3 social-links d-flex mt-4">
         <ul type="none">
-          <li class="m-2"><a href=""><i class="bi bi-twitter-x"></i></a></li>
-          <li class="m-2"><a href=""><i class="bi bi-facebook"></i></a></li>
-          <li class="m-2"><a href=""><i class="bi bi-github"></i></a></li>
-          <li class="m-2"><a href=""><i class="bi bi-linkedin"></i></a></li>
+          <li class="m-2"><a href="{{ author.x_account }}"><i class="bi bi-twitter-x"></i></a></li>
+          <li class="m-2"><a href="{{ author.fb_account }}"><i class="bi bi-facebook"></i></a></li>
+          <li class="m-2"><a href="{{ author.github_account }}"><i class="bi bi-github"></i></a></li>
+          <li class="m-2"><a href="{{ author.linkedin_account }}"><i class="bi bi-linkedin"></i></a></li>
         </ul>
       </div>
 
       <div class="col-lg-3 col-md-3 footer-links">
         <h4>Useful Links</h4>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About us</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Terms of service</a></li>
-          <li><a href="#">Privacy policy</a></li>
+          <li><a href="{% url 'home' %}">Home</a></li>
+          <li><a href="{% url 'categories' %}">Categories</a></li>
+          <li><a href="{% url 'author' %}">Author Profile</a></li>
+          <li><a href="{% url 'contacts' %}">Contacts</a></li>
         </ul>
       </div>
 
       <div class="col-lg-3 col-md-3 footer-links">
         <h4>Top Categories</h4>
         <ul>
-          {% for cat in categories.all|dictsortreversed:"posts_count" %}
+          {% for cat in categories %}
           {% if forloop.counter <= 5 %}
           <li style="display: flex; justify-content: space-between;">
-            <span style="flex: 1; text-align:left;"><a href="#">{{ cat }}</a></span>
+            <span style="flex: 1; text-align:left;"><a href="{% url 'category' cat.pk %}">{{ cat }}</a></span>
             <span style="text-align: right;"></span>{{ cat.posts_count }}</span>
           </li>
           {% endif %}

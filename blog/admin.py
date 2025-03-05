@@ -1,9 +1,34 @@
 from django.contrib import admin
-from . models import Category, Blog, Comment
+from . models import CustomUser, Category, Blog, Comment
+from django.contrib.auth.admin import UserAdmin
 
 
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'created_at', 'updated_at')
+
+
+class CustomUserAdmin(UserAdmin):
+    model = CustomUser
+
+    fieldsets = (
+        *UserAdmin.fieldsets,  # original form fieldsets, expanded
+        (                      # new fieldset added on to the bottom
+            # group heading of your choice; set to None for a blank space instead of a header
+            'Custom Field Heading',
+            {
+                'fields': (
+                    'position',
+                    'x_account',
+                    'fb_account',
+                    'github_account',
+                    'linkedin_account',
+                    'image',
+                    'intro',
+                    'about'
+                ),
+            },
+        ),
+    )
 
 
 class BlogAdmin(admin.ModelAdmin):
@@ -27,6 +52,7 @@ class CommentAdmin(admin.ModelAdmin):
                      'email', 'website', 'comment')
 
 
+admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Blog, BlogAdmin)
 admin.site.register(Comment, CommentAdmin)

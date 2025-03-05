@@ -1,0 +1,107 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<!-- Page Title -->
+<div class="page-title position-relative">
+    <div class="title-wrapper">
+      <h1>Blog Categoryies</h1>
+      <p>Browse through our blog categories, each represented by a selected post. Click on a category to discover more!</p>
+    </div>
+  </div><!-- End Page Title -->
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-8">
+
+        <!-- Category Postst Section -->
+        <section id="category-postst" class="category-postst section">
+
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row gy-4">
+                {% for post in posts %}
+                {% if post is not None %}
+              <div class="col-lg-6">
+                <article>
+
+                  <div class="post-img">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid" style="width: 100%;">
+                  </div>
+
+                  <p class="post-category"><a href="{% url 'category' post.category.pk %}" class="post-category">{{ post.category }}</a></p>
+
+                  <h2 class="title">
+                    <a href="">{{ post.title }}</a>
+                  </h2>
+
+                  <div class="d-flex align-items-center">
+                    <div class="post-meta">
+                      <p class="post-date">
+                        <time datetime="{{ post.created_at|date }}">{{ post.created_at|date:"N d, Y" }}</time>
+                      </p>
+                    </div>
+                  </div>
+
+                </article>
+              </div><!-- End post list item -->
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+
+        </section><!-- /Category Postst Section -->
+      </div>
+
+      <div class="col-lg-4 sidebar">
+
+        <div class="widgets-container" data-aos="fade-up" data-aos-delay="200">
+
+          <!-- Categories Widget -->
+          <div class="categories-widget widget-item">
+
+            <h3 class="widget-title">Categories</h3>
+            <ul class="mt-3">
+                {% for category in categories.all|dictsortreversed:"posts_count" %}
+                <li><a href="{% url 'category' category.pk %}">{{ category }} <span>({{ category.posts_count }})</span></a></li>
+                {% endfor %}
+            </ul>
+
+          </div><!--/Categories Widget -->
+
+          <!-- Recent Posts Widget -->
+          <div class="recent-posts-widget widget-item">
+
+            <h3 class="widget-title">Recent Posts</h3>
+
+            {% for recent_post in recent_posts %}
+            <div class="post-item">
+              <img src="{{ recent_post.image.url }}" alt="{{ recent_post.title }}" class="flex-shrink-0">
+              <div>
+                <h4><a href="">{{ recent_post.title }}</a></h4>
+                <time datetime="{{ post.created_at|date }}">{{ post.created_at|date:"N d, Y" }}</time>
+              </div>
+            </div><!-- End recent post item-->
+            {% endfor %}
+
+          </div><!--/Recent Posts Widget -->
+
+          <!-- Tags Widget -->
+          <div class="tags-widget widget-item">
+
+            <h3 class="widget-title">Tags</h3>
+            <ul>
+                {% for tag in tags %}
+              <li><a href="{% url 'tag' tag.pk %}">{{ tag.name }}</a></li>
+              {% endfor %}
+            </ul>
+
+          </div><!--/Tags Widget -->
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+{% endblock %}
