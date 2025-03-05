@@ -22,7 +22,7 @@
 					</div>
 					<h2 class="post-title">
 						<a
-							href=""
+							href="{% url 'blog' large.slug %}"
 							title="{{ large.title }}"
 							>{{ large.title }}</a
 						>
@@ -45,7 +45,7 @@
 					</div>
 					<h3 class="post-title">
 						<a
-							href="blog-details.html"
+							href="{% url 'blog' large.slug %}"
 							title="{{ large.title }}"
 							>{{ large.title }}</a
 						>
@@ -67,7 +67,7 @@
 					</div>
 					<h3 class="post-title">
 						<a
-							href="blog-details.html"
+							href="{% url 'blog' large.slug %}"
 							title="{{ large.title }}"
 							>{{ large.title }}</a
 						>
@@ -136,14 +136,14 @@
 								<span><i class="bi bi-chat-dots"></i> {{ small.number_of_comments }} Comments</span>
 							</div>
 							<h2>
-								<a href="#"
+								<a href="{% url 'blog' small.slug %}"
 									>{{ small.title }}</a
 								>
 							</h2>
 							<p>
 								{{ small.short_description }}
 							</p>
-							<a href="#" class="read-more"
+							<a href="{% url 'blog' small.slug %}" class="read-more"
 								>Read More <i class="bi bi-arrow-right"></i
 							></a>
 						</div>
@@ -184,7 +184,7 @@
 					<p class="post-category"><a href="{% url 'category' post.category.pk %}">{{ post.category }}</a></p>
 
 					<h2 class="title">
-						<a href=""
+						<a href="{% url 'blog' post.slug %}"
 							>{{ post.title }}</a
 						>
 					</h2>

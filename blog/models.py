@@ -67,7 +67,7 @@ class Comment(models.Model):
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE)
     full_name = models.TextField(max_length=100, null=False)
     email = models.EmailField(null=False)
-    website = models.URLField(null=True)
+    website = models.URLField(null=True, blank=True)
     comment = models.TextField(max_length=250, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

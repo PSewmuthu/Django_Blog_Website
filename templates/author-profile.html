@@ -88,7 +88,7 @@
                           </div>
                           <div class="article-details">
                             <div class="post-category"><a href="{% url 'category' featured_post.category.pk %}">{{ featured_post.category }}</a></div>
-                            <h5><a href="">{{ featured_post.title }}</a></h5>
+                            <h5><a href="{% url 'blog' featured_post.slug %}">{{ featured_post.title }}</a></h5>
                             <div class="post-meta">
                               <span><i class="bi bi-clock"></i> {{ featured_post.created_at|date }}</span>
                               <span><i class="bi bi-chat-dots"></i> {{ featured_post.number_of_comments }} Comments</span>
