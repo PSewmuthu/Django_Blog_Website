@@ -30,11 +30,7 @@ FEATURED_CHOICE = (
 
 class Blog(models.Model):
     title = models.CharField(max_length=100, unique=True)
-
-    def _get_slug(self):
-        return slugify(self.title)
-
-    slug = property(_get_slug)
+    slug = models.SlugField(unique=True, null=True, blank=True)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='uploads/%y/%m/%d')
     short_description = models.TextField(max_length=1000)
@@ -46,6 +42,10 @@ class Blog(models.Model):
     tags = TaggableManager()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Blog, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.title
