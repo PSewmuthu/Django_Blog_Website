@@ -28,6 +28,42 @@ The blog platform provides a **user-friendly** and **secure** way to create, man
 - Intuitive UI for easy navigation and interaction.
 - Responsive design for a seamless experience on all devices.
 
+## 📸 Screenshots
+
+### Home Page
+
+<img src='screenshots/home.png' alt='Home Page' width='500'>
+
+### Blog Categories
+
+<img src='screenshots/categories.png' alt='Blog Categories' width='500'>
+
+### Single Category
+
+<img src='screenshots/category.png' alt='Single Category' width='500'>
+
+### Search Results
+
+<img src='screenshots/search.png' alt='Search Results' width='500'>
+
+### Blog Post Page
+
+<img src='screenshots/blog post.png' alt='Blog Post' width='500'>
+
+### Blog Post Comments
+
+<img src='screenshots/blog comments.png' alt='Post Comments' width='500'>
+
+### Author Profile Page
+
+<img src='screenshots/author.png' alt='Author Profile' width='500'>
+
+## 🎥 Demo GIF
+
+Check out the website in action:
+
+<img src='screenshots/Blog Website - Home.gif' alt='Website Demo' width='500'>
+
 ## 🛠️ Tech Stack
 
 | Component          | Technology                   |
