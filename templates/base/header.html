@@ -1,0 +1,95 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta content="width=device-width, initial-scale=1.0" name="viewport" />
+		<title>Blog Website</title>
+		<meta name="description" content="" />
+		<meta name="keywords" content="blog" />
+
+		<!-- Favicons -->
+		<link href="{% static 'img/favicon.png' %}" rel="icon" />
+		<link
+			href="{% static 'img/apple-touch-icon.png' %}"
+			rel="apple-touch-icon"
+		/>
+
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com" rel="preconnect" />
+		<link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Vendor CSS Files -->
+		<link
+			href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}"
+			rel="stylesheet"
+		/>
+		<link
+			href="{% static 'vendor/bootstrap-icons/bootstrap-icons.css' %}"
+			rel="stylesheet"
+		/>
+		<link href="{% static 'vendor/aos/aos.css' %}" rel="stylesheet" />
+		<link
+			href="{% static 'vendor/swiper/swiper-bundle.min.css' %}"
+			rel="stylesheet"
+		/>
+		<link
+			href="{% static 'vendor/glightbox/css/glightbox.min.css' %}"
+			rel="stylesheet"
+		/>
+
+		<!-- Main CSS File -->
+		<link href="{% static 'css/main.css' %}" rel="stylesheet" />
+
+		<!-- =======================================================
+  * Template Name: Blogy
+  * Template URL: https://bootstrapmade.com/blogy-bootstrap-blog-template/
+  * Updated: Feb 22 2025 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+	</head>
+
+	<body class="index-page">
+		<header id="header" class="header position-relative">
+			<div class="container-fluid container-xl position-relative">
+				<div class="top-row d-flex align-items-center justify-content-between">
+					<a href="{% url 'home' %}" class="logo d-flex align-items-end">
+						<!-- Uncomment the line below if you also wish to use an image logo -->
+						<!-- <img src="assets/img/logo.webp" alt=""> -->
+						<h1 class="sitename">Blog Website</h1>
+						<span>.</span>
+					</a>
+
+					<div class="d-flex align-items-center">
+						<form class="search-form ms-4" action="{% url 'search' %}" method="GET">
+							<input type="text" name="keyword" placeholder="Search..." class="form-control" />
+							<button type="submit" class="btn">
+								<i class="bi bi-search"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<div class="nav-wrap">
+				<div class="container d-flex justify-content-center position-relative">
+					<nav id="navmenu" class="navmenu">
+						<ul>
+							<li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+							<li><a href="{% url 'categories' %}" class="{% if '/category/' in request.path or '/categories/' in request.path or '/tag/' in request.path %}active{% endif %}">Categories</a></li>
+							<li><a href="{% url 'author' %}" class="{% if request.path == '/author' %}active{% endif %}">Author Profile</a></li>
+
+							<li><a href="{% url 'contacts' %}" class="{% if request.path == '/contacts/' %}active{% endif %}">Contact</a></li>
+						</ul>
+						<i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+					</nav>
+				</div>
+			</div>
+		</header>
+
+		<main class="main">

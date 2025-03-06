@@ -1,0 +1,114 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+    <!-- Page Title -->
+    <div class="page-title">
+      <div class="title-wrapper">
+        <h1>Author Profile</h1>
+        <p>Welcome to my blog! Here, you'll find a collection of my posts, with a featured one highlighted for you.</p>
+      </div>
+    </div><!-- End Page Title -->
+
+    <!-- Author Profile Section -->
+    <section id="author-profile" class="author-profile section">
+
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+        <div class="author-profile-1">
+
+          <div class="row">
+            <!-- Author Info -->
+            <div class="col-lg-4 mb-4 mb-lg-0">
+              <div class="author-card" data-aos="fade-up">
+                <div class="author-image">
+                  <img src="{{ user.image.url }}" alt="Author" class="img-fluid rounded">
+                </div>
+
+                <div class="author-info">
+                  <h2>{{ user.first_name }} {{ user.last_name }}</h2>
+                  <p class="designation">{{ user.position }}</p>
+
+                  <div class="author-bio">
+                    {{ user.intro }}
+                  </div>
+
+                  <div class="author-stats d-flex justify-content-between text-center my-4">
+                    <div class="stat-item">
+                      <h4 data-purecounter-start="0" data-purecounter-end="{{ posts_count }}" data-purecounter-duration="1" class="purecounter"></h4>
+                      <p>Articles</p>
+                    </div>
+                    <div class="stat-item">
+                      <h4 data-purecounter-start="0" data-purecounter-end="{{ categories_count }}" data-purecounter-duration="1" class="purecounter"></h4>
+                      <p>Categories</p>
+                    </div>
+                    <div class="stat-item">
+                      <h4 data-purecounter-start="0" data-purecounter-end="{{ tags_count }}" data-purecounter-duration="1" class="purecounter">K</h4>
+                      <p>Tags</p>
+                    </div>
+                  </div>
+
+                  <div class="social-links">
+                    <a href="{{ user.x_account }}" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                    <a href="{{ user.fb_account }}" class="facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="{{ user.github_account }}" class="github"><i class="bi bi-github"></i></a>
+                    <a href="{{ user.linkedin_account }}" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Author Content -->
+            <div class="col-lg-8">
+              <div class="author-content" data-aos="fade-up" data-aos-delay="200">
+                <div class="content-header">
+                  <h3>About Me</h3>
+                </div>
+                <div class="content-body">
+                  <p>{{ user.about }}</p>
+
+                  <div class="expertise-areas">
+                    <h4>Areas of Expertise</h4>
+                    <div class="tags">
+                      {% for category in categories %}
+                      {% if forloop.counter <= 6 %}
+                      <span>{{ category.name }}</span>
+                      {% endif %}
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                  <div class="featured-articles mt-5">
+                    <h4>Featured Articles</h4>
+                    <div class="row g-4">
+                      {% for featured_post in features_posts %}
+                      <div class="col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <article class="article-card">
+                          <div class="article-img">
+                            <img src="{{ featured_post.image.url }}" alt="Article" class="img-fluid">
+                          </div>
+                          <div class="article-details">
+                            <div class="post-category"><a href="{% url 'category' featured_post.category.pk %}">{{ featured_post.category }}</a></div>
+                            <h5><a href="{% url 'blog' featured_post.slug %}">{{ featured_post.title }}</a></h5>
+                            <div class="post-meta">
+                              <span><i class="bi bi-clock"></i> {{ featured_post.created_at|date }}</span>
+                              <span><i class="bi bi-chat-dots"></i> {{ featured_post.number_of_comments }} Comments</span>
+                            </div>
+                          </div>
+                        </article>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section><!-- /Author Profile Section -->
+
+{% endblock %}

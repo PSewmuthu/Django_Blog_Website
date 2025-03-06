@@ -1,0 +1,236 @@
+{% extends 'base/base.html' %}
+{% block content %}
+{% load static %}
+
+<!-- Blog Hero Section -->
+<section id="blog-hero" class="blog-hero section">
+	<div class="container" data-aos="fade-up" data-aos-delay="100">
+		<div class="blog-grid">
+			{% for large in large_featured_posts %}
+			{% if forloop.counter == 1 %}
+			<!-- Featured Post (Large) -->
+			<article class="blog-item featured" data-aos="fade-up">
+				<img
+					src="{{ large.image.url }}"
+					alt="{{ large.title }}"
+					class="img-fluid"
+				/>
+				<div class="blog-content">
+					<div class="post-meta">
+						<span class="date">{{ large.created_at|date:"N d, Y" }}</span>
+						<span class="category"><a href="{% url 'category' large.category.pk %}" style="color: white;">{{ large.category }}</a></span>
+					</div>
+					<h2 class="post-title">
+						<a
+							href="{% url 'blog' large.slug %}"
+							title="{{ large.title }}"
+							>{{ large.title }}</a
+						>
+					</h2>
+				</div>
+			</article>
+			<!-- End Featured Post -->
+			 {% elif forloop.counter == 2 %}
+			<!-- Regular Posts -->
+			<article class="blog-item" data-aos="fade-up" data-aos-delay="100">
+				<img
+					src="{{ large.image.url }}"
+					alt="{{ large.title }}"
+					class="img-fluid"
+				/>
+				<div class="blog-content">
+					<div class="post-meta">
+						<span class="date">{{ large.created_at|date:"N d, Y" }}</span>
+						<span class="category"><a href="{% url 'category' large.category.pk %}" style="color: white;">{{ large.category }}</a></span>
+					</div>
+					<h3 class="post-title">
+						<a
+							href="{% url 'blog' large.slug %}"
+							title="{{ large.title }}"
+							>{{ large.title }}</a
+						>
+					</h3>
+				</div>
+			</article>
+			<!-- End Blog Item -->
+			 {% else %}
+			<article class="blog-item" data-aos="fade-up" data-aos-delay="200">
+				<img
+					src="{{ large.image.url }}"
+					alt="{{ large.title }}"
+					class="img-fluid"
+				/>
+				<div class="blog-content">
+					<div class="post-meta">
+						<span class="date">{{ large.created_at|date:"N d, Y" }}</span>
+						<span class="category"><a href="{% url 'category' large.category.pk %}" style="color: white;">{{ large.category }}</a></span>
+					</div>
+					<h3 class="post-title">
+						<a
+							href="{% url 'blog' large.slug %}"
+							title="{{ large.title }}"
+							>{{ large.title }}</a
+						>
+					</h3>
+				</div>
+			</article>
+			<!-- End Blog Item -->
+			 {% endif %}
+			 {% endfor %}
+		</div>
+	</div>
+</section>
+<!-- /Blog Hero Section -->
+
+<!-- Featured Posts Section -->
+<section id="featured-posts" class="featured-posts section">
+	<!-- Section Title -->
+	<div class="container section-title" data-aos="fade-up">
+		<h2>Featured Posts</h2>
+		<div>
+			<span>Check Our</span>
+			<span class="description-title">Featured Posts</span>
+		</div>
+	</div>
+	<!-- End Section Title -->
+
+	<div class="container" data-aos="fade-up" data-aos-delay="100">
+		<div class="blog-posts-slider swiper init-swiper">
+			<script type="application/json" class="swiper-config">
+				{
+					"loop": true,
+					"speed": 800,
+					"autoplay": {
+						"delay": 5000
+					},
+					"slidesPerView": 3,
+					"spaceBetween": 30,
+					"breakpoints": {
+						"320": {
+							"slidesPerView": 1,
+							"spaceBetween": 20
+						},
+						"768": {
+							"slidesPerView": 2,
+							"spaceBetween": 20
+						},
+						"1200": {
+							"slidesPerView": 3,
+							"spaceBetween": 30
+						}
+					}
+				}
+			</script>
+
+			<div class="swiper-wrapper">
+				{% for small in small_featured_posts %}
+				<div class="swiper-slide">
+					<div class="blog-post-item">
+						<img
+							src="{{ small.image.url }}"
+							alt="{{ small.title }}"
+						/>
+						<div class="blog-post-content">
+							<div class="post-meta">
+								<span><i class="bi bi-clock"></i> {{ small.created_at|date:"N d, Y" }}</span>
+								<span><i class="bi bi-chat-dots"></i> {{ small.number_of_comments }} Comments</span>
+							</div>
+							<h2>
+								<a href="{% url 'blog' small.slug %}"
+									>{{ small.title }}</a
+								>
+							</h2>
+							<p>
+								{{ small.short_description }}
+							</p>
+							<a href="{% url 'blog' small.slug %}" class="read-more"
+								>Read More <i class="bi bi-arrow-right"></i
+							></a>
+						</div>
+					</div>
+				</div>
+				<!-- End slide item -->
+				 {% endfor %}
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /Featured Posts Section -->
+
+<!-- Latest Posts Section -->
+<section id="latest-posts" class="latest-posts section">
+	<!-- Section Title -->
+	<div class="container section-title" data-aos="fade-up">
+		<h2>Latest Posts</h2>
+		<div>
+			<span>Check Our</span> <span class="description-title">Latest Posts</span>
+		</div>
+	</div>
+	<!-- End Section Title -->
+
+	<div class="container" data-aos="fade-up" data-aos-delay="100">
+		<div class="row gy-4">
+			{% for post in posts %}
+			<div class="col-lg-4">
+				<article>
+					<div class="post-img">
+						<img
+							src="{{ post.image.url }}"
+							alt="{{ post.title }}"
+							class="img-fluid"
+						/>
+					</div>
+
+					<p class="post-category"><a href="{% url 'category' post.category.pk %}">{{ post.category }}</a></p>
+
+					<h2 class="title">
+						<a href="{% url 'blog' post.slug %}"
+							>{{ post.title }}</a
+						>
+					</h2>
+
+					<div class="d-flex align-items-center">
+						<div class="post-meta">
+							<p class="post-date">
+								<time datetime="{{ post.created_at|date }}">{{ post.created_at|date:"N d, Y" }}</time>
+							</p>
+						</div>
+					</div>
+				</article>
+			</div>
+			<!-- End post list item -->
+			 {% endfor %}
+		</div>
+	</div>
+</section>
+<!-- /Latest Posts Section -->
+
+    <!-- Call To Action Section -->
+    <section id="call-to-action" class="call-to-action section">
+		<div class="container" data-aos="fade-up" data-aos-delay="100">
+		  <div class="row gy-4 justify-content-between align-items-center">
+			<div class="col-lg-6">
+			  <div class="cta-content" data-aos="fade-up" data-aos-delay="200">
+				<h2>Subscribe to our newsletter</h2>
+				<p>Don’t miss out on new content! Sign up for our newsletter and be the first to read my latest blog posts.</p>
+				<form action="" method="post" class="php-email-form cta-form" data-aos="fade-up" data-aos-delay="300">
+				  <div class="input-group mb-3">
+					<input type="email" name="email" class="form-control" placeholder="Email address..." aria-label="Email address" aria-describedby="button-subscribe">
+					<button class="btn btn-primary" type="submit" id="button-subscribe">Subscribe</button>
+				  </div>
+				  <div class="loading">Loading</div>
+				  <div class="error-message"></div>
+				  <div class="sent-message">Your subscription request has been sent. Thank you!</div>
+				</form>
+			  </div>
+			</div>
+			<div class="col-lg-4">
+			  <div class="cta-image" data-aos="zoom-out" data-aos-delay="200">
+				<img src="{% static 'img/cta/cta-1.webp' %}" alt="" class="img-fluid">
+			  </div>
+			</div>
+		  </div>
+		</div>
+	  </section><!-- /Call To Action Section -->
+
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<!-- Page Title -->
+<div class="page-title position-relative">
+    <div class="title-wrapper">
+      <h1>Blog Categoryies</h1>
+      <p>Browse through our blog categories, each represented by a selected post. Click on a category to discover more!</p>
+    </div>
+  </div><!-- End Page Title -->
+
+  <div class="container">
+    <div class="row">
+
+      <div class="col-lg-8">
+
+        <!-- Category Postst Section -->
+        <section id="category-postst" class="category-postst section">
+
+          <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row gy-4">
+                {% for post in posts %}
+                {% if post is not None %}
+              <div class="col-lg-6">
+                <article>
+
+                  <div class="post-img">
+                    <img src="{{ post.image.url }}" alt="{{ post.title }}" class="img-fluid" style="width: 100%;">
+                  </div>
+
+                  <p class="post-category"><a href="{% url 'category' post.category.pk %}" class="post-category">{{ post.category }}</a></p>
+
+                  <h2 class="title">
+                    <a href="{% url 'blog' post.slug %}">{{ post.title }}</a>
+                  </h2>
+
+                  <div class="d-flex align-items-center">
+                    <div class="post-meta">
+                      <p class="post-date">
+                        <time datetime="{{ post.created_at|date }}">{{ post.created_at|date:"N d, Y" }}</time>
+                      </p>
+                    </div>
+                  </div>
+
+                </article>
+              </div><!-- End post list item -->
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+
+        </section><!-- /Category Postst Section -->
+      </div>
+
+      {% include 'addons/right-sidebar.html' %}
+
+    </div>
+  </div>
+
+{% endblock %}
